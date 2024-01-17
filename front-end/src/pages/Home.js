@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom"
 import landing from "../images/landing.png"
+import { useContext } from "react"
+import { QuestionContext } from "../context/QuestionContext"
 
 export default function Home() {
+  const {addQuestion} = useContext(QuestionContext)
+
+  
   return (
     <section id="hero" className="d-flex align-items-center">
 

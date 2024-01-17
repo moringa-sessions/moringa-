@@ -38,7 +38,7 @@ def get_answers_for_question(question_id):
 @answer_bp.route('/answers/<int:answer_id>', methods=['PUT'])
 def update_answer(answer_id):
     answer = Answer.query.get_or_404(answer_id)
-    data = request.json
+    data = request.form
 
     answer.body = data['body']
 

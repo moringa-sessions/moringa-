@@ -36,10 +36,12 @@ def get_question(question_id):
 
     if question:
         result.append({'id': question.id, 'title': question.title, 
-                       'body': question.body,
-                       'tags': question.tags, 
-                       'views': question.views, 
-                       'user': {'id': question.user.id, 'username': question.user.username }
+                'body': question.body,
+                'tags': question.tags, 
+                'views': question.views, 
+                'user': {'id': question.user.id, 'username': question.user.username },
+                'answers': [{'id': answer.id, 'body': answer.body} for answer in question.answers]
+
                        })
         return jsonify(result)
     return jsonify({"error": "Question not found!"}), 404
@@ -48,8 +50,9 @@ def get_question(question_id):
 # Create Question
 @question_bp.route('/questions', methods=['POST'])
 def create_question():
-    data = request.form 
-    new_question = Question(title=data['title'], body=data['body'],tags=data['tags'], user_id=data['user_id'])
+    data = request.get_json()
+    print("DATA ", data)
+    new_question = Question(title=data['title'], body=data['body'],tags=data['tags'], user_id=1)
     db.session.add(new_question)
     db.session.commit()
     return jsonify({"success": "Question created successfully!"}), 201
@@ -122,6 +125,7 @@ def get_question_answers(question_id):
     # print("cccccxx ", question.user.id)
 
     return jsonify(question_data)
+
 
 # Update views
 @question_bp.route('/update_views/<int:question_id>', methods=['PUT'])

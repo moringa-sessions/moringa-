@@ -20,6 +20,9 @@ export default function Navbar() {
         <li className="nav-item">
           <Link to="/addquestion" className="nav-link active">Add Question</Link>
         </li>
+        <li className="nav-item">
+          <Link to="/profile" className="nav-link active">Profile</Link>
+        </li>
         <button className="btn btn-success btn-sm me-3">
           <Link to="/register" className="nav-link active text-white">Register</Link>
         </button>

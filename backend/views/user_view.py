@@ -4,12 +4,14 @@ from flask import request, jsonify, Blueprint
 user_bp = Blueprint('user_bp', __name__)
 
 
+# add user
 @user_bp.route("/users", methods=["POST"])
 def add_users():
-    username = request.form.get('username')
-    email = request.form.get('email')
-    phone = request.form.get('phone')
-    password = request.form.get('password')
+    data = request.get_json()
+    username = data['username']
+    email = data['email']
+    phone = data['phone']
+    password = data['password']
 
  
 
