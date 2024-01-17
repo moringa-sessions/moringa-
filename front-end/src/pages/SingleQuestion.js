@@ -1,37 +1,88 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { QuestionContext } from '../context/QuestionContext'
+import { AnswerContext } from '../context/AnswerContext'
 
 export default function SingleQuestion() 
 {
+  const [question, setQuestion] = useState([])
+  const [body, setBody] = useState()
+
+  const {questions} = useContext(QuestionContext)
+  const {addAnswer} = useContext(AnswerContext)
+
+  const {id} = useParams()
+
+  useEffect(()=>{
+    const x =questions.find((question)=> { 
+        return question.id===parseInt(id) }
+      )
+      setQuestion(x)
+
+
+  }, [id, questions])
+
+
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+
+    // call your useContext function
+    addAnswer(question.id,  body)
+
+    // Clear your form
+    setBody("")
+  }
+
   return (
     <div className='container'>
-      <h3 className='my-3'>How can i use react</h3>
+      <h3 className='my-3'>{question && question.title}</h3>
       <div className='row border-bottom p-3 bg-white mt-3'>
 
         <div className='col-md-9 row'>
           <div className='col-2 card p-2'>
-            <h6>Upvotes 0</h6>
-            <h6>Views 0</h6>
-            <h6>DownVotes 0</h6>
+            <h6>Views {question && question.views}</h6>
           </div>
           <div className='col-10 '>
-            <p>Lorem ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum</p>
+            <p>{ question && question.body}</p>
             <div className='d-flex gap-3 flex-wrap'>
-              <span className='bg-secondary rounded px-2 fs-6 text-white'>React</span>
-              <span className='bg-secondary rounded px-2 fs-6 text-white'>Python</span>
-              <span className='bg-secondary rounded px-2 fs-6 text-white'>Flask</span>
-              <span className='bg-secondary rounded px-2 fs-6 text-white'>React Icons</span>
+            {(()=>{
+              const tagsToArray = question && question.tags && question.tags.split(",")
+              
+              return tagsToArray && tagsToArray.map((tag, index)=>(
+                <span key={index} className='bg-secondary rounded px-2 fs-6 text-white'>{tag}</span>
+
+              ))
+
+              
+              }
+              )()
+            
+            }
             </div> 
             <div className='mt-4'>
-              <h5>Answers</h5>
-              <div>
-                <p>Lorem ips ipsum ipsum ipsum</p>
-                <hr/>
-              </div>
-              <div>
-                <p>Lorem ips ipsum ipsum ipsum</p>
-                <hr/>
-              </div>
+
+              <form onSubmit={handleSubmit} className="">
+                <div className="mb-3">
+                  <label className="form-label">Your Answer</label>
+                  <textarea type="text" value={body} onChange={(e)=>setBody(e.target.value)} rows={3} className="form-control" required placeholder="Type here" > 
+                  </textarea>
+                </div>
+          
+                <button type="submit" className="btn btn-success">Submit an answer</button>
+              </form>
+
+              <h5 className='my-3'>Answers</h5>
+
+
+              {question && question.answers && question.answers.map((answer,index)=>(
+                <div key={index}>
+                  <p>{answer.body}</p>
+                  <hr/>
+                </div>
+              ))}
+
+            
 
             </div>
           </div>

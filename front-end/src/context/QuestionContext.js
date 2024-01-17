@@ -39,6 +39,20 @@ export default function QuestionProvider({children})
         })
     }
 
+        // update views in question
+        function updateQuestionViews(id)
+        {
+            fetch(`/update_views/${id}`,{
+                method: "PUT",             
+    
+            }
+            )
+            .then(res => res.json())
+            .then(response => {
+                setOnchange(!onchange)
+            })
+        }
+
 
     // fetch questions
     useEffect(()=>{
@@ -55,7 +69,8 @@ export default function QuestionProvider({children})
     // context data
     const contextData = {
         addQuestion,
-        questions
+        questions,
+        updateQuestionViews
 
         // pass all your variables and function
     }

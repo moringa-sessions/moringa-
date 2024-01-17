@@ -11,6 +11,7 @@ import Questions from "./pages/Questions";
 import SingleQuestion from "./pages/SingleQuestion";
 import QuestionProvider from "./context/QuestionContext";
 import UserProvider from "./context/UserContext";
+import AnswerProvider from "./context/AnswerContext";
 
 
 function App() 
@@ -19,6 +20,7 @@ function App()
   return (
     <UserProvider>
     <QuestionProvider>
+      <AnswerProvider>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -34,6 +36,7 @@ function App()
       </Route>
     </Routes>
   </BrowserRouter>
+  </AnswerProvider>
   </QuestionProvider>
   </UserProvider>
   );

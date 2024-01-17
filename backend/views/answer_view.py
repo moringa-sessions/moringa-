@@ -10,9 +10,9 @@ answer_bp = Blueprint('answer_bp', __name__)
 @answer_bp.route('/answers', methods=['POST'])
 def create_answer():
     # data = request.json
-    data = request.form 
+    data = request.json 
 
-    new_answer = Answer(body=data['body'], question_id=data['question_id'], user_id=data['user_id'])
+    new_answer = Answer(body=data['body'], question_id=data['question_id'], user_id=1)
 
     db.session.add(new_answer)
     db.session.commit()
