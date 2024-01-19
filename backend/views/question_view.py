@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from models import Question, db, User
 from sqlalchemy.orm import joinedload
+from flask_jwt_extended import  jwt_required, get_jwt_identity
 
 question_bp = Blueprint('question_bp', __name__)
 
@@ -49,10 +50,11 @@ def get_question(question_id):
 
 # Create Question
 @question_bp.route('/questions', methods=['POST'])
+@jwt_required()
 def create_question():
     data = request.get_json()
     print("DATA ", data)
-    new_question = Question(title=data['title'], body=data['body'],tags=data['tags'], user_id=1)
+    new_question = Question(title=data['title'], body=data['body'],tags=data['tags'], user_id=get_jwt_identity())
     db.session.add(new_question)
     db.session.commit()
     return jsonify({"success": "Question created successfully!"}), 201
@@ -60,32 +62,45 @@ def create_question():
 
 # Update Question
 @question_bp.route('/question/<int:question_id>', methods=['PUT'])
+@jwt_required()
 def update_question(question_id):
     question = Question.query.get(question_id)
     if question:
-        data = request.form
-        question.title = data.get('title', question.title)
-        question.body = data.get('body', question.body)
-        db.session.commit()
-        return 'Question updated successfully!', 200
+        if question:
+            if question.user_id == get_jwt_identity():
+                data = request.form
+                question.title = data.get('title', question.title)
+                question.body = data.get('body', question.body)
+                db.session.commit()
+                return 'Question updated successfully!', 200
+        
+        else:
+            return jsonify({"error": "You are trying to delete someone's question!"}), 404
+
     return jsonify({"error": "Question not found!"}), 404
 
 
 # Delete Question
 @question_bp.route('/question/<int:question_id>', methods=['DELETE'])
+@jwt_required()
 def delete_question(question_id):
     question = Question.query.get(question_id)
     if question:
-        db.session.delete(question)
-        db.session.commit()
-        return 'Question deleted successfully!', 200
+        if question.user_id == get_jwt_identity():
+            db.session.delete(question)
+            db.session.commit()
+            return 'Question deleted successfully!', 200
+        else:
+            return jsonify({"error": "You are trying to delete someone's question!"}), 404
+
     return jsonify({"error": "Question you are trying to delete is not found!"}), 404
 
 
 # Get Questions by User ID
-@question_bp.route('/get_questions_by_user/<int:user_id>', methods=['GET'])
-def get_questions_by_user(user_id):
-    questions = Question.query.filter_by(user_id=user_id).all()
+@question_bp.route('/get_questions_by_user', methods=['GET'])
+@jwt_required()
+def get_questions_by_user():
+    questions = Question.query.filter_by(user_id=get_jwt_identity()).all()
     
     if questions:
         result = []

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e1bd748e30264071d60dec2fd3a4e445370213a2b1c6cf5d5dc96e0698455fae"
+            "sha256": "3370072c7be3358d22651cb701f5a6eeeefa9f976965eb6f7e7ee41e1b8f7092"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -47,11 +47,19 @@
         },
         "flask": {
             "hashes": [
-                "sha256:21128f47e4e3b9d597a3e8521a329bf56909b690fcc3fa3e477725aa81367638",
-                "sha256:cfadcdb638b609361d29ec22360d6070a77d7463dcb3ab08d2c2f2f168845f58"
+                "sha256:6489f51bb3666def6f314e15f19d50a1869a19ae0e8c9a3641ffe66c77d42403",
+                "sha256:ca631a507f6dfe6c278ae20112cea3ff54ff2216390bf8880f6b035a5354af13"
             ],
             "index": "pypi",
-            "version": "==3.0.0"
+            "version": "==3.0.1"
+        },
+        "flask-jwt-extended": {
+            "hashes": [
+                "sha256:63a28fc9731bcc6c4b8815b6f954b5904caa534fc2ae9b93b1d3ef12930dca95",
+                "sha256:9215d05a9413d3855764bcd67035e75819d23af2fafb6b55197eb5a3313fdfb2"
+            ],
+            "index": "pypi",
+            "version": "==4.6.0"
         },
         "flask-migrate": {
             "hashes": [
@@ -234,6 +242,13 @@
             ],
             "version": "==2.1.3"
         },
+        "pyjwt": {
+            "hashes": [
+                "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de",
+                "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"
+            ],
+            "version": "==2.8.0"
+        },
         "python-dateutil": {
             "hashes": [
                 "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
@@ -321,6 +336,7 @@
                 "sha256:0e923e726174922dce09c53c59ad483ff7bbb8e572e00c7f7c46b88556409f31",
                 "sha256:84e64a1c28cf7e91ed2078bb8cc8c259cb19b76942096c8d7b84947690cabaf0"
             ],
+            "markers": "python_version < '3.10'",
             "version": "==3.17.0"
         }
     },

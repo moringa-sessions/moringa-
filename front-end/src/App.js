@@ -18,10 +18,11 @@ function App()
 {
 
   return (
+    <BrowserRouter>
+
     <UserProvider>
     <QuestionProvider>
       <AnswerProvider>
-    <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -35,10 +36,11 @@ function App()
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
-  </BrowserRouter>
   </AnswerProvider>
   </QuestionProvider>
   </UserProvider>
+  </BrowserRouter>
+
   );
 }
 

@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -9,6 +10,10 @@ class User(db.Model):
     phone = db.Column(db.String(14), default="0123456789")
     password = db.Column(db.String(150), unique=False, nullable=False)
   
+class TokenBlocklist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    jti =  db.Column(db.String(100),nullable=True)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
 
 class Question(db.Model):
@@ -21,7 +26,7 @@ class Question(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
-    user = db.relationship("User", backref=db.backref('questions', lazy=True), cascade="all, delete")
+    user = db.relationship("User", backref=db.backref('questions', lazy=True))
     answers = db.relationship("Answer", backref=db.backref('question', lazy=True), cascade="all, delete")
 
 

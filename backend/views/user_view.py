@@ -1,5 +1,6 @@
 from models import db, User
 from flask import request, jsonify, Blueprint
+from werkzeug.security import generate_password_hash
 
 user_bp = Blueprint('user_bp', __name__)
 
@@ -11,7 +12,7 @@ def add_users():
     username = data['username']
     email = data['email']
     phone = data['phone']
-    password = data['password']
+    password = generate_password_hash(data['password'])
 
  
 
