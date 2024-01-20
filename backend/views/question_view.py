@@ -66,14 +66,14 @@ def create_question():
 def update_question(question_id):
     question = Question.query.get(question_id)
     if question:
-        if question:
-            if question.user_id == get_jwt_identity():
-                data = request.form
-                question.title = data.get('title', question.title)
-                question.body = data.get('body', question.body)
-                db.session.commit()
-                return 'Question updated successfully!', 200
         
+        if question.user_id == get_jwt_identity():
+            data = request.form
+            question.title = data.get('title', question.title)
+            question.body = data.get('body', question.body)
+            db.session.commit()
+            return 'Question updated successfully!', 200
+    
         else:
             return jsonify({"error": "You are trying to delete someone's question!"}), 404
 
@@ -89,7 +89,7 @@ def delete_question(question_id):
         if question.user_id == get_jwt_identity():
             db.session.delete(question)
             db.session.commit()
-            return 'Question deleted successfully!', 200
+            return jsonify({"success": "Deleted successfully!"}), 200
         else:
             return jsonify({"error": "You are trying to delete someone's question!"}), 404
 

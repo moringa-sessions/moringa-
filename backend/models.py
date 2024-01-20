@@ -10,6 +10,7 @@ class User(db.Model):
     phone = db.Column(db.String(14), default="0123456789")
     password = db.Column(db.String(150), unique=False, nullable=False)
   
+#   For Logout JWT Block List
 class TokenBlocklist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     jti =  db.Column(db.String(100),nullable=True)
