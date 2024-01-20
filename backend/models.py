@@ -8,7 +8,7 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(70), unique=True, nullable=False)
     phone = db.Column(db.String(14), default="0123456789")
-    password = db.Column(db.String(150), unique=False, nullable=False)
+    password = db.Column(db.String(450), unique=False, nullable=False)
   
 #   For Logout JWT Block List
 class TokenBlocklist(db.Model):

@@ -13,7 +13,7 @@ def add_users():
     username = data['username']
     email = data['email']
     phone = data['phone']
-    password = generate_password_hash(data['password'])
+    password = generate_password_hash(data['password'], )
 
  
 

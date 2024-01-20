@@ -8,6 +8,7 @@ flask = "*"
 flask-migrate = "*"
 faker = "*"
 flask-jwt-extended = "*"
+gunicorn = "*"
 
 [dev-packages]
 

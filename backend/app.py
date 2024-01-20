@@ -9,12 +9,12 @@ from views import *
 from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://test_cfcg_user:BiR85fod7R3ZVpMvv1juQs4OEjnzipAq@dpg-cmltljol5elc73c81nm0-a.oregon-postgres.render.com/test_cfcg"
-db.init_app(app)
-migrate = Migrate(app, db)
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://mo_qq1i_user:MzAwMJpfOzoTpJJNGOOMyTbTS7TBbq1J@dpg-cmlun1i1hbls73ccgjo0-a.oregon-postgres.render.com/mo_qq1i"
 
 CORS(app)
+
+db.init_app(app)
+migrate = Migrate(app, db)
 
 jwt = JWTManager()
 app.config["JWT_SECRET_KEY"] = "fjhjdjhfiskyfvdgvydklvsrfl"
