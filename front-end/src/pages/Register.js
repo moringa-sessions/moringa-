@@ -49,7 +49,7 @@ export default function Register() {
           <label className="form-label">Password</label>
           <input type="password"  value={password} onChange={ e => setPassword(e.target.value)} className="form-control"/>
         </div>
-        <button type="submit" className="btn btn-success w-100">Login</button>
+        <button type="submit" className="btn btn-success w-100">Register</button>
       </form>
     </div>
 

@@ -11,8 +11,15 @@ export default function Questions()
     <div className='container'>
       <h3 className='my-3'>All Questions {questions.length}</h3>
 
-      { questions && questions.map(question=>(
-      <div onClick={()=> updateQuestionViews(question.id)} className='row border-bottom p-3 bg-white mt-3'>
+      {
+        questions && questions.length<1 &&
+        <div className="alert alert-info text-center" role="alert">
+           No questions at the moment!
+        </div>
+      }
+
+      { questions && questions.map((question, index)=>(
+      <div key={index} onClick={()=> updateQuestionViews(question.id)} className='row border-bottom p-3 bg-white mt-3'>
         <div className='col-md-3 d-flex flex-column'>
           <p>{question.answers.length} Answers</p>
           <p>{question.views} Views</p>

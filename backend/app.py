@@ -3,6 +3,7 @@ from models import db, User, Question, Answer, Vote
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_cors import CORS
 
 from views import *
 from flask_jwt_extended import JWTManager
@@ -11,6 +12,8 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 db.init_app(app)
 migrate = Migrate(app, db)
+
+CORS(app)
 
 jwt = JWTManager()
 app.config["JWT_SECRET_KEY"] = "fjhjdjhfiskyfvdgvydklvsrfl"

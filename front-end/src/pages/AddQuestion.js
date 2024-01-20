@@ -1,10 +1,12 @@
 import { useContext, useState } from "react"
 import question from "../images/question.png"
 import { QuestionContext } from "../context/QuestionContext"
+import { UserContext } from "../context/UserContext"
 
 export default function AddQuestion() 
 {
   const {addQuestion} = useContext(QuestionContext)
+  const {currentUser} = useContext(UserContext)
 
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
@@ -26,7 +28,7 @@ export default function AddQuestion()
   return (
   <div className='container row pt-5'>
     <div className='col-md-6 h-100 bg-success'>
-      <img src={question} className="w-100 img-fluid" />
+      <img src={question} className="w-100 img-fluid" alt=""/>
     </div>
 
     <div className='col-md-6 card  w-full pt-3 pb-4 px-lg-5'>
@@ -46,7 +48,11 @@ export default function AddQuestion()
           <label className="form-label">Tags(separate with Comma)</label>
           <input type="text" value={tags} onChange={(e)=>setTags(e.target.value)} className="form-control" required />
         </div>
-        <button type="submit" className="btn btn-success w-100">Post</button>
+        {currentUser?
+          <button type="submit" className="btn btn-success w-100">Post</button>
+          :
+          <p className='text-secondary'>Login to ask a question</p>
+        }
       </form>
     </div>
 

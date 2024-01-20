@@ -11,7 +11,6 @@ import Questions from "./pages/Questions";
 import SingleQuestion from "./pages/SingleQuestion";
 import QuestionProvider from "./context/QuestionContext";
 import UserProvider from "./context/UserContext";
-import AnswerProvider from "./context/AnswerContext";
 
 
 function App() 
@@ -19,10 +18,8 @@ function App()
 
   return (
     <BrowserRouter>
-
     <UserProvider>
     <QuestionProvider>
-      <AnswerProvider>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -36,7 +33,6 @@ function App()
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
-  </AnswerProvider>
   </QuestionProvider>
   </UserProvider>
   </BrowserRouter>

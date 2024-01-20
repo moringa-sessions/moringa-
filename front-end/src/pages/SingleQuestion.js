@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 import { QuestionContext } from '../context/QuestionContext'
-import { AnswerContext } from '../context/AnswerContext'
+import { UserContext } from '../context/UserContext'
 
 export default function SingleQuestion() 
 {
   const [question, setQuestion] = useState([])
   const [body, setBody] = useState()
 
-  const {questions} = useContext(QuestionContext)
-  const {addAnswer} = useContext(AnswerContext)
+  const {questions,deleteQuestion, addAnswer} = useContext(QuestionContext)
+  const {currentUser} = useContext(UserContext)
 
   const {id} = useParams()
 
@@ -42,6 +42,9 @@ export default function SingleQuestion()
         <div className='col-md-9 row'>
           <div className='col-2 card p-2'>
             <h6>Views {question && question.views}</h6>
+            { (currentUser && currentUser.id)===(question && question.user && question.user.id) &&
+             <button onClick={()=>deleteQuestion(question.id)} type="button" class="btn btn-danger btn-sm">Delete question</button>
+            }
           </div>
           <div className='col-10 '>
             <p>{ question && question.body}</p>
@@ -60,6 +63,8 @@ export default function SingleQuestion()
             
             }
             </div> 
+            <p className='mt-3'>Posted by <span className='fw-bold'>{ question && question.user && question.user.username}</span></p>
+
             <div className='mt-4'>
 
               <form onSubmit={handleSubmit} className="">
@@ -68,9 +73,12 @@ export default function SingleQuestion()
                   <textarea type="text" value={body} onChange={(e)=>setBody(e.target.value)} rows={3} className="form-control" required placeholder="Type here" > 
                   </textarea>
                 </div>
-          
-                <button type="submit" className="btn btn-success">Submit an answer</button>
-              </form>
+                {currentUser?
+                  <button type="submit" className="btn btn-success">Submit an answer</button>
+                  :
+                  <p className='text-secondary'>Login to submit an answer</p>
+                }
+                  </form>
 
               <h5 className='my-3'>Answers</h5>
 
