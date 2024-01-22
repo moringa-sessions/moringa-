@@ -18,7 +18,7 @@ export default function UserProvider({children})
     // add user
     function addUser(username,email,phone, password)
     {
-        fetch("http://127.0.0.1:5000/users",{
+        fetch("https://moringa-overflow.onrender.com/users",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -61,7 +61,7 @@ export default function UserProvider({children})
         // Update user
         function updateUser(username,email,phone)
         {
-            fetch("http://127.0.0.1:5000/users",{
+            fetch("https://moringa-overflow.onrender.com/users",{
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export default function UserProvider({children})
     // login user
     function login(username,password)
     {
-        fetch("http://127.0.0.1:5000/login",{
+        fetch("https://moringa-overflow.onrender.com/login",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -149,7 +149,7 @@ export default function UserProvider({children})
         // DELETE  user account
         function delete_your_account()
         {
-            fetch("http://127.0.0.1:5000/users",{
+            fetch("https://moringa-overflow.onrender.com/users",{
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -210,7 +210,7 @@ export default function UserProvider({children})
     useEffect(()=>{
         if(authToken)
         {
-            fetch("http://127.0.0.1:5000/authenticated_user",{
+            fetch("https://moringa-overflow.onrender.com/authenticated_user",{
             method: "GET",
             headers: {
                 Accept: "application/json",

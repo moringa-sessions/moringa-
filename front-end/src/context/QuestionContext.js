@@ -20,7 +20,7 @@ export default function QuestionProvider({children})
     // add question
     function addQuestion(title, body, tags)
     {
-        fetch("http://127.0.0.1:5000/questions",{
+        fetch("https://moringa-overflow.onrender.com/questions",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export default function QuestionProvider({children})
         // delete question
         function deleteQuestion(id)
         {
-            fetch(`http://127.0.0.1:5000/question/${id}`,{
+            fetch(`https://moringa-overflow.onrender.com/question/${id}`,{
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export default function QuestionProvider({children})
     // add answer
     function addAnswer(question_id, body)
     {
-        fetch("http://127.0.0.1:5000/answers",{
+        fetch("https://moringa-overflow.onrender.com/answers",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export default function QuestionProvider({children})
         // update views in question
         function updateQuestionViews(id)
         {
-            fetch(`http://127.0.0.1:5000/update_views/${id}`,{
+            fetch(`https://moringa-overflow.onrender.com/update_views/${id}`,{
                 method: "PUT",             
     
             }
@@ -151,7 +151,7 @@ export default function QuestionProvider({children})
 
     // fetch questions
     useEffect(()=>{
-        fetch("http://127.0.0.1:5000/questions")
+        fetch("https://moringa-overflow.onrender.com/questions")
         .then(res => res.json())
         .then(response => {
             setQuestions(response)
